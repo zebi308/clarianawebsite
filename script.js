@@ -264,36 +264,144 @@ if (nodes.length && !prefersReducedMotion) {
 
 const workflows = {
   sales: {
-    trigger: "New lead enters CRM",
-    triggerSub: "Website form, LinkedIn, or referral",
-    ai: "Clean, enrich, and score",
-    aiSub: "Removes duplicates and flags intent",
-    outcome: "Booked call with context",
-    outcomeSub: "Sales team gets next best action"
+    label: "Sales Operations",
+    description: "Automates every step from lead capture to booked meeting, so your sales team only talks to warm, ready prospects.",
+    hours: "12h", manual: "0", speed: "4×",
+    steps: [
+      { title: "New lead submits form", desc: "Website, LinkedIn ad, or referral email lands in the system automatically.", tools: ["HubSpot", "Website", "LinkedIn"] },
+      { title: "Clean and deduplicate", desc: "Removes duplicate contacts, fixes formatting, and fills in missing fields from enrichment sources.", tools: ["Clearbit", "n8n", "CRM"] },
+      { title: "Score and qualify", desc: "AI reads company size, intent signals, and past behaviour to assign a priority score and next action.", tools: ["GPT-4o", "Scoring rules", "CRM"] },
+      { title: "Send personalised outreach", desc: "Tailored follow-up email sent within minutes. Calendar link included for high-score leads.", tools: ["Gmail", "Calendly", "Slack"] },
+      { title: "Meeting booked, rep briefed", desc: "Sales rep receives a briefing card with lead history, score, and talking points before the call.", tools: ["HubSpot", "Notion", "Slack"] }
+    ],
+    before: "Sales reps manually chase every lead, copy data between tools, and lose hot prospects in the inbox.",
+    after: "Every lead is scored and followed up within minutes. Reps only pick up the phone when a meeting is already booked."
   },
   reporting: {
-    trigger: "Weekly data arrives",
-    triggerSub: "Sheets, CRM, finance, and ops tools",
-    ai: "Validate and transform",
-    aiSub: "Fixes gaps and prepares clean tables",
-    outcome: "Live leadership dashboard",
-    outcomeSub: "Decisions from one trusted view"
+    label: "Reporting & Dashboards",
+    description: "Pulls data from every tool your team uses, cleans it, and delivers one trusted leadership dashboard every Monday morning.",
+    hours: "8h", manual: "0", speed: "3×",
+    steps: [
+      { title: "Data sources send updates", desc: "CRM, finance system, spreadsheets, and ops tools all push fresh data on a schedule.", tools: ["Sheets", "Xero", "HubSpot"] },
+      { title: "Validate and flag errors", desc: "Missing values, duplicate rows, and format mismatches are caught and corrected automatically.", tools: ["n8n", "Python", "Make"] },
+      { title: "Transform into clean tables", desc: "AI maps each data source to a consistent format, ready for the dashboard layer.", tools: ["GPT-4o", "BigQuery", "Airtable"] },
+      { title: "Build and refresh dashboard", desc: "Charts, KPIs, and trend lines update in real time without anyone touching a spreadsheet.", tools: ["Looker Studio", "Notion", "Sheets"] },
+      { title: "Report delivered to leaders", desc: "Automated summary email sent to the right people every Monday with highlights and anomalies flagged.", tools: ["Gmail", "Slack", "PDF export"] }
+    ],
+    before: "Someone spends hours every week pulling numbers from five tools, formatting a spreadsheet, and emailing a PDF that is already out of date.",
+    after: "Leadership opens one live dashboard with accurate numbers, trend alerts, and no manual effort from anyone on the team."
   },
   support: {
-    trigger: "Customer request received",
-    triggerSub: "Email, website, or help desk",
-    ai: "Classify and draft response",
-    aiSub: "Reads context and routes urgency",
-    outcome: "Faster resolution",
-    outcomeSub: "Team handles fewer repetitive tickets"
+    label: "Customer Support",
+    description: "Sorts, prioritises, and drafts responses to every inbound request so your team spends time solving problems, not reading emails.",
+    hours: "15h", manual: "0", speed: "6×",
+    steps: [
+      { title: "Request arrives", desc: "Email, website form, live chat, or help desk ticket triggers the automation instantly.", tools: ["Zendesk", "Gmail", "Intercom"] },
+      { title: "Classify and prioritise", desc: "AI reads the message, identifies the topic, urgency level, and customer tier in seconds.", tools: ["GPT-4o", "Zendesk", "Make"] },
+      { title: "Check knowledge base", desc: "Searches internal docs and past tickets for the right answer or resolution path.", tools: ["Notion", "Confluence", "Pinecone"] },
+      { title: "Draft personalised response", desc: "Writes a reply in your brand tone, pre-filled with the customer's name, account details, and solution.", tools: ["GPT-4o", "Zendesk", "Gmail"] },
+      { title: "Agent reviews and sends", desc: "Agent sees draft response, approves in one click. Complex cases are escalated with full context attached.", tools: ["Slack alert", "Zendesk", "CRM"] }
+    ],
+    before: "Support agents read every ticket from scratch, search for answers manually, and copy-paste the same replies dozens of times a day.",
+    after: "Agents start every shift with triaged tickets, pre-written drafts, and context already loaded. Resolution time drops by over half."
   },
   finance: {
-    trigger: "Invoice or expense uploaded",
-    triggerSub: "Email attachment or shared folder",
-    ai: "Extract and cross-check",
-    aiSub: "Matches supplier, amount, and category",
-    outcome: "Ready for approval",
-    outcomeSub: "Finance admin moves without chasing"
+    label: "Finance & Invoicing",
+    description: "Captures invoices and expenses from any source, validates them against your records, and moves them through approval without any chasing.",
+    hours: "10h", manual: "0", speed: "5×",
+    steps: [
+      { title: "Invoice or receipt received", desc: "Email attachment, shared folder upload, or supplier portal submission triggers the process.", tools: ["Gmail", "Google Drive", "Xero"] },
+      { title: "Extract key data", desc: "AI reads supplier name, amount, date, VAT, and line items from any document format automatically.", tools: ["GPT-4o", "OCR", "n8n"] },
+      { title: "Match and validate", desc: "Cross-checks against purchase orders, existing supplier records, and spending limits. Flags anything unusual.", tools: ["Xero", "QuickBooks", "Airtable"] },
+      { title: "Route for approval", desc: "Invoices within policy are auto-approved. Exceptions are sent to the right approver with full context.", tools: ["Slack", "Gmail", "Approval flow"] },
+      { title: "Filed and reconciled", desc: "Approved invoices are posted to the ledger, filed in the right folder, and the supplier is notified automatically.", tools: ["Xero", "Google Drive", "Gmail"] }
+    ],
+    before: "Finance team manually opens every email, re-types numbers into spreadsheets, chases approvals over Slack, and reconciles at month end.",
+    after: "Invoices process themselves. Finance spends time on analysis and strategy instead of data entry and chasing signatures."
+  },
+  hr: {
+    label: "HR & Onboarding",
+    description: "From offer accepted to day one ready — contracts, accounts, welcome packs, and manager briefings all happen without HR lifting a finger.",
+    hours: "9h", manual: "0", speed: "5×",
+    steps: [
+      { title: "Offer accepted in ATS", desc: "Candidate marks offer as accepted in the applicant tracking system, triggering the full onboarding flow.", tools: ["Workable", "Greenhouse", "Gmail"] },
+      { title: "Generate contract and docs", desc: "Contract auto-populated with name, role, salary, start date, and company policies. Sent for e-signature instantly.", tools: ["DocuSign", "GPT-4o", "Google Drive"] },
+      { title: "Set up accounts and access", desc: "IT receives an automated request to create email, Slack, and system access before the start date.", tools: ["Slack", "Google Workspace", "Notion"] },
+      { title: "Send welcome pack", desc: "Personalised welcome email, first-week schedule, team intro, and policy documents delivered automatically.", tools: ["Gmail", "Notion", "Calendar"] },
+      { title: "Manager briefing created", desc: "Manager receives a one-page briefing on the new hire: background, role context, and 30-day plan template.", tools: ["Notion", "GPT-4o", "Slack"] }
+    ],
+    before: "HR manually emails contracts, chases signatures, messages IT separately, and copies the same welcome information into emails for every new starter.",
+    after: "A new hire is fully set up before their start date with zero manual effort from HR. Every step is logged and nothing falls through the cracks."
+  },
+  marketing: {
+    label: "Marketing Campaigns",
+    description: "Turns a brief into a live, scheduled campaign across every channel — without the team spending days on copy, approvals, and publishing.",
+    hours: "14h", manual: "0", speed: "7×",
+    steps: [
+      { title: "Campaign brief submitted", desc: "Marketing manager fills a short form or sends a Slack message. That is the only manual step.", tools: ["Notion", "Slack", "Typeform"] },
+      { title: "Research and angle generation", desc: "AI pulls competitor content, trending topics, and audience signals to recommend the best campaign angle.", tools: ["GPT-4o", "Perplexity", "SEMrush"] },
+      { title: "Generate content variants", desc: "Writes email copy, social captions, ad headlines, and blog intro in your brand voice across every channel.", tools: ["GPT-4o", "Brand guidelines", "Canva API"] },
+      { title: "Review and approve", desc: "Draft content is posted to Notion or Slack for one-click approval. Edits are fed back and regenerated instantly.", tools: ["Notion", "Slack", "Google Docs"] },
+      { title: "Schedule and publish", desc: "Approved content is scheduled across email, LinkedIn, Instagram, and paid channels automatically.", tools: ["Mailchimp", "Buffer", "Meta Ads"] }
+    ],
+    before: "Campaign takes two weeks of back-and-forth: briefing copywriters, waiting for drafts, chasing approvals, then manually scheduling across six tools.",
+    after: "Campaign is researched, written, approved, and live within 48 hours. The team focuses on strategy and results, not production work."
+  },
+  legal: {
+    label: "Legal & Contracts",
+    description: "Drafts, reviews, routes, and files contracts without your team re-reading the same clauses or chasing signatures across email threads.",
+    hours: "11h", manual: "0", speed: "4×",
+    steps: [
+      { title: "Contract request raised", desc: "Sales team, operations, or a client triggers a contract request via CRM, email, or a simple form.", tools: ["HubSpot", "Typeform", "Gmail"] },
+      { title: "Select template and populate", desc: "System picks the right contract template and fills it with counterparty name, dates, terms, and deal-specific values.", tools: ["GPT-4o", "DocuSign", "Google Docs"] },
+      { title: "AI clause review", desc: "AI scans the draft for unusual terms, missing standard clauses, liability gaps, and flags anything that needs human review.", tools: ["GPT-4o", "Legal rules", "n8n"] },
+      { title: "Route for approval and signature", desc: "Standard contracts go straight to DocuSign. Flagged items go to the legal reviewer with an annotated summary.", tools: ["DocuSign", "Slack", "Gmail"] },
+      { title: "Filed and CRM updated", desc: "Signed contract is stored in the correct folder, metadata extracted, and the CRM deal is automatically updated.", tools: ["Google Drive", "HubSpot", "Airtable"] }
+    ],
+    before: "Legal team manually drafts each contract from scratch, reviews the same standard clauses every time, and chases signatures for weeks over email.",
+    after: "Standard contracts are drafted, reviewed, and sent for signature in under an hour. Legal only gets involved when there is a genuine risk to assess."
+  },
+  ecommerce: {
+    label: "E-commerce Operations",
+    description: "Keeps inventory, fulfilment, customer communications, and returns in sync across every channel without anyone manually updating records.",
+    hours: "18h", manual: "0", speed: "8×",
+    steps: [
+      { title: "Order placed or return requested", desc: "New order, cancellation, or return request arrives from Shopify, marketplace, or direct channel.", tools: ["Shopify", "Amazon", "WooCommerce"] },
+      { title: "Inventory updated instantly", desc: "Stock levels adjusted across all channels the moment an order is confirmed. Overselling is eliminated.", tools: ["Shopify", "n8n", "Airtable"] },
+      { title: "Fulfilment triggered", desc: "Warehouse or 3PL receives the pick list automatically. Tracking number is generated and logged.", tools: ["ShipStation", "Royal Mail", "3PL API"] },
+      { title: "Customer kept informed", desc: "Confirmation, dispatch, and delivery notifications sent automatically. Returns handled with one-click label generation.", tools: ["Klaviyo", "Gmail", "Shopify"] },
+      { title: "Data synced and reported", desc: "Revenue, returns, and stock data flow into the dashboard. Reorder alerts fire when stock hits threshold.", tools: ["Shopify", "Looker Studio", "Slack"] }
+    ],
+    before: "Operations team manually checks orders, updates spreadsheets, emails customers individually, and discovers stock issues only when a customer complains.",
+    after: "Every order flows from placement to delivery without anyone touching it. The team manages by exception, not by routine."
+  },
+  ops: {
+    label: "Business Operations",
+    description: "Runs all recurring operational tasks on schedule — checks, updates, alerts, and handoffs — without anyone needing to remember to do them.",
+    hours: "16h", manual: "0", speed: "6×",
+    steps: [
+      { title: "Scheduled trigger fires", desc: "Daily, weekly, or event-based trigger starts the workflow. No human needs to initiate anything.", tools: ["n8n", "Make", "Cron"] },
+      { title: "Gather data from systems", desc: "Pulls current status from CRM, project tools, finance system, and ops platforms in one pass.", tools: ["HubSpot", "Notion", "Xero"] },
+      { title: "Run checks and comparisons", desc: "Compares actuals against targets, SLAs, deadlines, and thresholds. Flags anything outside expected range.", tools: ["GPT-4o", "n8n", "Airtable"] },
+      { title: "Alert and escalate", desc: "Issues are sent to the right person with context. Routine status updates go to the team automatically.", tools: ["Slack", "Gmail", "Teams"] },
+      { title: "Log and archive", desc: "Every run is logged with timestamp, findings, and actions taken. Audit trail maintained automatically.", tools: ["Notion", "Google Drive", "Airtable"] }
+    ],
+    before: "Operations managers spend hours each week on status checks, chasing updates from different tools, and compiling reports nobody has time to read.",
+    after: "Operations run on autopilot. The team gets alerted only when something needs a decision. Everything else is handled, logged, and tracked."
+  },
+  data: {
+    label: "Data Pipelines",
+    description: "Connects every data source your business uses, cleans the data automatically, and loads it into one place your team can actually trust.",
+    hours: "20h", manual: "0", speed: "10×",
+    steps: [
+      { title: "New data source connected", desc: "API, webhook, CSV upload, or database connection established. No engineering resource required.", tools: ["n8n", "Fivetran", "Airbyte"] },
+      { title: "Raw data extracted", desc: "Data is pulled on a schedule or in real time, handling rate limits, pagination, and authentication automatically.", tools: ["Python", "n8n", "API"] },
+      { title: "Clean, map, and validate", desc: "Column names standardised, data types corrected, nulls handled, and duplicates removed before anything is stored.", tools: ["GPT-4o", "dbt", "Python"] },
+      { title: "Load to data warehouse", desc: "Clean data is written to BigQuery, Postgres, or your chosen warehouse with schema versioning maintained.", tools: ["BigQuery", "Postgres", "Snowflake"] },
+      { title: "Analysts get fresh, trusted data", desc: "Dashboard refreshes automatically. Anomaly alerts fire if data quality drops. No manual intervention needed.", tools: ["Looker Studio", "Metabase", "Slack"] }
+    ],
+    before: "Data team spends most of its time fixing broken pipelines, arguing about which spreadsheet is correct, and manually refreshing dashboards every morning.",
+    after: "Analysts open their tools and the data is already clean, current, and consistent. They spend their time finding insights, not fixing data problems."
   }
 };
 
@@ -302,36 +410,50 @@ const setText = (selector, value) => {
   if (element) element.textContent = value;
 };
 
+const setHTML = (selector, value) => {
+  const element = document.querySelector(selector);
+  if (element) element.innerHTML = value;
+};
+
+const applyWorkflow = (flow) => {
+  setText("[data-wf-label]", flow.label);
+  setText("[data-wf-description]", flow.description);
+  setText("[data-wf-hours]", flow.hours);
+  setText("[data-wf-manual]", flow.manual);
+  setText("[data-wf-speed]", flow.speed);
+  setText("[data-wf-before]", flow.before);
+  setText("[data-wf-after]", flow.after);
+
+  const stepKeys = ["s1","s2","s3","s4","s5"];
+  flow.steps.forEach((step, i) => {
+    const k = stepKeys[i];
+    setText(`[data-wf-${k}-title]`, step.title);
+    setText(`[data-wf-${k}-desc]`, step.desc);
+    setHTML(`[data-wf-${k}-tools]`, step.tools.map(t => `<span>${t}</span>`).join(""));
+  });
+};
+
 document.querySelectorAll("[data-workflow]").forEach((button) => {
   button.addEventListener("click", () => {
     document.querySelectorAll("[data-workflow]").forEach((item) => item.classList.remove("is-active"));
     button.classList.add("is-active");
     const flow = workflows[button.dataset.workflow];
-    const cards = document.querySelectorAll(".workflow-card");
+    const pipeline = document.querySelector("[data-wf-pipeline]");
+    const canvas = document.querySelector(".wf-canvas");
 
-    if (hasGsap && !prefersReducedMotion) {
-      gsap.to(cards, {
-        y: 16,
-        autoAlpha: 0,
-        duration: 0.18,
-        stagger: 0.035,
+    if (hasGsap && !prefersReducedMotion && pipeline) {
+      gsap.to(pipeline, {
+        y: 12, autoAlpha: 0, duration: 0.18,
         onComplete: () => {
-          setText("[data-flow-trigger]", flow.trigger);
-          setText("[data-flow-trigger-sub]", flow.triggerSub);
-          setText("[data-flow-ai]", flow.ai);
-          setText("[data-flow-ai-sub]", flow.aiSub);
-          setText("[data-flow-outcome]", flow.outcome);
-          setText("[data-flow-outcome-sub]", flow.outcomeSub);
-          gsap.to(cards, { y: 0, autoAlpha: 1, duration: 0.42, stagger: 0.06, ease: "power3.out" });
+          applyWorkflow(flow);
+          gsap.to(pipeline, { y: 0, autoAlpha: 1, duration: 0.42, ease: "power3.out" });
         }
       });
+      if (canvas) {
+        gsap.fromTo(canvas, { borderColor: "rgba(0,169,143,0.6)" }, { borderColor: "rgba(0,125,112,0.18)", duration: 0.8 });
+      }
     } else {
-      setText("[data-flow-trigger]", flow.trigger);
-      setText("[data-flow-trigger-sub]", flow.triggerSub);
-      setText("[data-flow-ai]", flow.ai);
-      setText("[data-flow-ai-sub]", flow.aiSub);
-      setText("[data-flow-outcome]", flow.outcome);
-      setText("[data-flow-outcome-sub]", flow.outcomeSub);
+      applyWorkflow(flow);
     }
   });
 });
@@ -567,6 +689,64 @@ window.ClarianaMotion = {
   upgrade: upgradeMotion,
   startSmoothScroll
 };
+
+// ── Stat counters ──────────────────────────────────────────────
+const animateCounter = (el) => {
+  const target = parseFloat(el.dataset.target);
+  if (!target) return;
+  const prefix = el.dataset.prefix || "";
+  const suffix = el.dataset.suffix || "";
+  const duration = 1800;
+  const start = performance.now();
+  const tick = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const value = Math.round(target * ease);
+    el.textContent = prefix + value + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll(".stat-number[data-target]").forEach(animateCounter);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const statsBar = document.querySelector(".stats-bar");
+if (statsBar) counterObserver.observe(statsBar);
+
+// ── Timeline scroll activation ─────────────────────────────────
+const timelineSteps = document.querySelectorAll(".timeline-step");
+const timelineTrackFill = document.querySelector(".timeline-track-fill");
+
+const timelineObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+    }
+  });
+}, { threshold: 0.25, rootMargin: "0px 0px -60px 0px" });
+
+timelineSteps.forEach(step => timelineObserver.observe(step));
+
+// Animate the track fill on scroll
+if (timelineTrackFill) {
+  const trackObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        timelineTrackFill.classList.add("is-animated");
+        trackObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.1 });
+  const timeline = document.querySelector(".timeline");
+  if (timeline) trackObserver.observe(timeline);
+}
 
 let libraryChecks = 0;
 const libraryTimer = window.setInterval(() => {
