@@ -502,26 +502,46 @@
                 <clipPath id="clip-drive"><circle cx="31" cy="31" r="18"/></clipPath>
                 <clipPath id="clip-slack"><circle cx="31" cy="31" r="18"/></clipPath>
                 <clipPath id="clip-shopify"><circle cx="31" cy="31" r="18"/></clipPath>
+                <clipPath id="clip-n8n"><circle cx="31" cy="31" r="18"/></clipPath>
               </defs>
 
-              <!-- Wires (background tracks) -->
+              <!-- Wires: orthogonal right-angle paths with rounded corners -->
               <g class="integration-wires">
-                <path class="integration-wire" d="M410 262 C360 228 310 180 232 180"/>
-                <path class="integration-beam beam-one" d="M410 262 C360 228 310 180 232 180"/>
-                <path class="integration-wire" d="M410 310 C360 305 315 296 262 296"/>
-                <path class="integration-beam beam-two" d="M410 310 C360 305 315 296 262 296"/>
-                <path class="integration-wire" d="M590 258 C645 215 695 180 762 180"/>
-                <path class="integration-beam beam-three" d="M590 258 C645 215 695 180 762 180"/>
-                <path class="integration-wire" d="M590 292 C638 272 672 278 712 278"/>
-                <path class="integration-beam beam-four" d="M590 292 C638 272 672 278 712 278"/>
-                <path class="integration-wire" d="M412 348 C368 382 335 428 297 428"/>
-                <path class="integration-beam beam-five" d="M412 348 C368 382 335 428 297 428"/>
-                <path class="integration-wire" d="M500 355 C500 388 500 418 500 445"/>
-                <path class="integration-beam beam-six" d="M500 355 C500 388 500 418 500 445"/>
-                <path class="integration-wire" d="M590 328 C648 352 676 388 712 390"/>
-                <path class="integration-beam beam-seven" d="M590 328 C648 352 676 388 712 390"/>
-                <path class="integration-wire" d="M592 342 C665 390 722 452 788 453"/>
-                <path class="integration-beam beam-eight" d="M592 342 C665 390 722 452 788 453"/>
+                <!-- META: left → up → left to card -->
+                <path class="integration-wire" d="M410 268 H340 Q320 268 320 248 V192 Q320 180 308 180 H232"/>
+                <path class="integration-beam beam-one" d="M410 268 H340 Q320 268 320 248 V192 Q320 180 308 180 H232"/>
+
+                <!-- QUICKBOOKS: straight left to card -->
+                <path class="integration-wire" d="M410 308 H264"/>
+                <path class="integration-beam beam-two" d="M410 308 H264"/>
+
+                <!-- HUBSPOT: right → up → right to card -->
+                <path class="integration-wire" d="M590 262 H660 Q680 262 680 242 V192 Q680 180 692 180 H762"/>
+                <path class="integration-beam beam-three" d="M590 262 H660 Q680 262 680 242 V192 Q680 180 692 180 H762"/>
+
+                <!-- WHATSAPP: straight right to card -->
+                <path class="integration-wire" d="M590 295 H712"/>
+                <path class="integration-beam beam-four" d="M590 295 H712"/>
+
+                <!-- GMAIL: left → down → left to card -->
+                <path class="integration-wire" d="M414 358 H370 Q350 358 350 378 V412 Q350 431 330 431 H297"/>
+                <path class="integration-beam beam-five" d="M414 358 H370 Q350 358 350 378 V412 Q350 431 330 431 H297"/>
+
+                <!-- DRIVE: straight down -->
+                <path class="integration-wire" d="M501 358 V445"/>
+                <path class="integration-beam beam-six" d="M501 358 V445"/>
+
+                <!-- SLACK: right → down → right to card -->
+                <path class="integration-wire" d="M590 315 H650 Q670 315 670 335 V360 Q670 389 712 389"/>
+                <path class="integration-beam beam-seven" d="M590 315 H650 Q670 315 670 335 V360 Q670 389 712 389"/>
+
+                <!-- SHOPIFY: right → down → right to card -->
+                <path class="integration-wire" d="M590 335 H655 Q695 335 695 370 V422 Q695 453 788 453"/>
+                <path class="integration-beam beam-eight" d="M590 335 H655 Q695 335 695 370 V422 Q695 453 788 453"/>
+
+                <!-- N8N: straight up from hub top -->
+                <path class="integration-wire" d="M500 228 V100"/>
+                <path class="integration-beam beam-nine" d="M500 228 V100"/>
               </g>
 
               <!-- Central hub -->
@@ -691,6 +711,21 @@
                 </g>
                 <text x="62" y="36">Shopify</text>
                 <title>Shopify</title>
+              </g>
+
+              <!-- N8N -->
+              <g class="integration-card n8n-logo" transform="translate(425 38)">
+                <rect class="card-bg" width="152" height="62" rx="16"/>
+                <circle class="card-icon-bg" cx="31" cy="31" r="20" fill="#EA4B71"/>
+                <g clip-path="url(#clip-n8n)">
+                  <rect x="13" y="13" width="36" height="36" fill="#EA4B71"/>
+                  <!-- n8n logo: two overlapping circles connected -->
+                  <circle cx="23" cy="31" r="7" fill="none" stroke="#fff" stroke-width="3"/>
+                  <circle cx="39" cy="31" r="7" fill="none" stroke="#fff" stroke-width="3"/>
+                  <line x1="30" y1="31" x2="32" y2="31" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                </g>
+                <text x="62" y="36">n8n</text>
+                <title>n8n</title>
               </g>
             </svg>
           </div>

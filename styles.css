@@ -1567,49 +1567,87 @@ input[type="range"] {
 .integration-beam {
   fill: none;
   stroke-linecap: round;
-  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
 .integration-wire {
-  opacity: 0.42;
-  stroke: rgba(255, 255, 255, 0.18);
+  opacity: 0.35;
+  stroke: rgba(255, 255, 255, 0.2);
 }
 
 .integration-beam {
   stroke: var(--teal);
-  stroke-width: 4;
-  stroke-dasharray: 60 220;
-  stroke-dashoffset: 280;
+  stroke-width: 3;
+  stroke-dasharray: 50 300;
+  stroke-dashoffset: 350;
   filter: url("#teal-glow");
   animation: beamTravel 3s linear infinite;
 }
 
+.integration-beam {
+  stroke: var(--teal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url("#teal-glow");
+  animation: beamTravel linear infinite;
+}
+
+/* Each beam gets exact dasharray/offset/duration matching its path length */
+.beam-one {
+  stroke-dasharray: 40 315;
+  stroke-dashoffset: 355;
+  animation-duration: 2.2s;
+  animation-delay: 0s;
+}
 .beam-two {
-  animation-delay: -0.35s;
+  stroke-dasharray: 40 175;
+  stroke-dashoffset: 215;
+  animation-duration: 1.2s;
+  animation-delay: -0.3s;
 }
-
 .beam-three {
-  animation-delay: -0.7s;
+  stroke-dasharray: 40 301;
+  stroke-dashoffset: 341;
+  animation-duration: 2.1s;
+  animation-delay: -0.5s;
 }
-
 .beam-four {
-  animation-delay: -1.05s;
+  stroke-dasharray: 40 146;
+  stroke-dashoffset: 186;
+  animation-duration: 1.0s;
+  animation-delay: -0.2s;
 }
-
 .beam-five {
-  animation-delay: -1.4s;
+  stroke-dasharray: 40 223;
+  stroke-dashoffset: 263;
+  animation-duration: 1.6s;
+  animation-delay: -0.8s;
 }
-
 .beam-six {
-  animation-delay: -1.75s;
+  stroke-dasharray: 40 104;
+  stroke-dashoffset: 144;
+  animation-duration: 0.8s;
+  animation-delay: -0.1s;
 }
-
 .beam-seven {
-  animation-delay: -2.1s;
+  stroke-dasharray: 40 229;
+  stroke-dashoffset: 269;
+  animation-duration: 1.6s;
+  animation-delay: -0.6s;
 }
-
 .beam-eight {
-  animation-delay: -2.45s;
+  stroke-dasharray: 40 367;
+  stroke-dashoffset: 407;
+  animation-duration: 2.6s;
+  animation-delay: -1.0s;
+}
+.beam-nine {
+  stroke-dasharray: 40 154;
+  stroke-dashoffset: 194;
+  animation-duration: 1.1s;
+  animation-delay: -0.4s;
 }
 
 .svg-hub rect:first-child {
