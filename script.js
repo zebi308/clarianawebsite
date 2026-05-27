@@ -757,3 +757,19 @@ const libraryTimer = window.setInterval(() => {
     window.clearInterval(libraryTimer);
   }
 }, 120);
+
+// ── Scroll to top button ───────────────────────────────────────
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+if (scrollTopBtn) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollTopBtn.classList.add('is-visible');
+    } else {
+      scrollTopBtn.classList.remove('is-visible');
+    }
+  }, { passive: true });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
