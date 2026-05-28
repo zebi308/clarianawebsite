@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block access to any sensitive or utility files
+Disallow: /assets/private/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://clariana.co.uk/sitemap.xml

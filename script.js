@@ -203,7 +203,7 @@ if (!prefersReducedMotion && hasGsap && hasScrollTrigger) {
 }
 
 const rotatingWord = document.querySelector("[data-rotating-word]");
-const rotatingPhrases = ["repetitive work.", "messy reporting.", "lead follow-up.", "manual admin.", "data chaos."];
+const rotatingPhrases = ["your entire pipeline.", "lead follow-up.", "customer onboarding.", "inbound enquiries.", "repetitive admin."];
 let rotatingIndex = 0;
 
 if (rotatingWord && !prefersReducedMotion) {
