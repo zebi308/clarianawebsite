@@ -3489,3 +3489,21 @@ details p {
 .hero-centered-section .proof-divider {
   background: rgba(255, 255, 255, 0.2) !important;
 }
+
+/* Rated 5.0 link to testimonials */
+.proof-rating-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+.proof-rating-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
