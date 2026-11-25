@@ -234,9 +234,6 @@ footer{background:var(--black);color:rgba(255,255,255,.6);padding:50px 0 30px;fo
 .demo-call .howto{color:rgba(255,255,255,.72);max-width:340px;margin-bottom:22px}
 .demo-call .howto b{color:#fff}
 .demo-call .fine{margin-top:22px;font-size:.78rem;color:rgba(255,255,255,.45);max-width:360px;line-height:1.5}
-.tap-tip{position:fixed;right:22px;bottom:98px;z-index:40;background:var(--cyan-soft);color:#062320;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;transform:translateY(8px);pointer-events:none;transition:.3s}
-.tap-tip::after{content:"";position:absolute;right:26px;bottom:-6px;width:12px;height:12px;background:var(--cyan-soft);transform:rotate(45deg);border-radius:2px}
-.tap-tip.show{opacity:1;transform:none}
 @media(max-width:980px){.demo-grid{grid-template-columns:1fr}}
 @media(max-width:520px){.sectors{grid-template-columns:1fr}.demo-pick,.demo-call{padding:26px}}
 
@@ -355,7 +352,6 @@ footer{background:var(--black);color:rgba(255,255,255,.6);padding:50px 0 30px;fo
   </div>
   <div id="widgetMount"></div>
 </section>
-<div class="tap-tip" id="tapTip" aria-hidden="true">Tap to talk to Callora</div>
 
 <!-- POCKET -->
 <section id="pocket">
@@ -616,6 +612,8 @@ footer{background:var(--black);color:rgba(255,255,255,.6);padding:50px 0 30px;fo
     mount.innerHTML='';
     var el=document.createElement('elevenlabs-convai');
     el.setAttribute('agent-id',AGENT_ID);
+    el.setAttribute('action-text','Try the Callora demo');
+    el.setAttribute('start-call-text','Start live demo');
     el.setAttribute('dynamic-variables',JSON.stringify({business_name:s.biz,sector:s.sector}));
     mount.appendChild(el);
   }
@@ -631,10 +629,14 @@ footer{background:var(--black);color:rgba(255,255,255,.6);padding:50px 0 30px;fo
   sectorBtns.forEach(function(b){b.addEventListener('click',function(){select(b.dataset.key)})});
   select('plumbing');
 
-  var tip=document.getElementById('tapTip'),demo=document.getElementById('demo');
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(en){en.forEach(function(e){tip.classList.toggle('show',e.isIntersecting)})},{threshold:.25}).observe(demo);
+  function guard(){
+    document.querySelectorAll('elevenlabs-convai').forEach(function(w){
+      if(w.getAttribute('agent-id')!==AGENT_ID){w.remove();}
+    });
   }
+  guard();
+  new MutationObserver(guard).observe(document.documentElement,{childList:true,subtree:true});
+
 })();
 </script>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
