@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Callora | AI Call Handling by Clariana — Never miss another opportunity</title>
+<meta name="description" content="Callora is an AI call-handling service by Clariana. It answers, qualifies and routes every enquiry around the clock, so your business never misses another opportunity.">
+<style>
+:root{
+  --teal-950:#0a1816;--teal-900:#12302e;--teal-800:#1a4a43;--teal-700:#256d60;
+  --cyan:#2f7f70;--cyan-soft:#5cc8b0;--cyan-glow:rgba(92,200,176,.2);
+  --black:#050c0c;--white:#fff;--grey-50:#f3f7f6;--grey-100:#e3ecea;--grey-500:#5b6f6c;--grey-700:#2f4542;
+  --radius:20px;--max:1180px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--black);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:96px 0;position:relative}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+h1,h2,h3{line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:16px}
+.lead{font-size:1.15rem;color:var(--grey-500);max-width:640px}
+.center{text-align:center}.center .lead{margin:0 auto}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:.98rem;border:1.5px solid transparent;cursor:pointer;transition:.25s;font-family:inherit}
+.btn-primary{background:var(--cyan);color:#fff}
+.btn-primary:hover{background:#38917f;transform:translateY(-2px);box-shadow:0 12px 30px var(--cyan-glow)}
+.btn-ghost{background:#fff;border-color:#fff;color:#0f2523}
+.btn-ghost:hover{background:var(--grey-100);border-color:var(--grey-100);transform:translateY(-2px)}
+.btn-dark{background:var(--teal-900);color:var(--white)}
+.btn-dark:hover{background:var(--black)}
+
+/* header (matches Clariana site) */
+header.nav{position:sticky;top:0;z-index:50;background:#0a1614;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav .wrap{max-width:none;padding:0 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:86px}
+.logo{display:flex;align-items:center;gap:12px;color:var(--white);font-weight:800;font-size:1.2rem}
+.logo-tile{width:48px;height:48px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.pillnav{display:flex;gap:6px;list-style:none;padding:6px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.04)}
+.pillnav a{display:block;padding:11px 20px;border-radius:999px;color:rgba(255,255,255,.82);font-weight:600;font-size:.97rem;transition:.2s}
+.pillnav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.pillnav a.active{color:var(--cyan-soft);background:rgba(92,200,176,.14)}
+.nav-right{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav .btn{padding:11px 22px;font-size:.92rem}
+.burger{display:none;background:none;border:0;color:#fff;cursor:pointer}
+
+/* hero (matches Clariana site) */
+.hero{color:var(--white);text-align:center;padding:150px 0 120px;overflow:hidden;
+  background:
+   linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px) 0 0/60px 60px,
+   linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px) 0 0/60px 60px,
+   radial-gradient(900px 480px at 50% 0,rgba(70,150,128,.38),transparent 70%),
+   linear-gradient(180deg,#1b3f38 0%,#0f2523 55%,#0b1a19 100%)}
+.hero .eyebrow{color:var(--cyan-soft);letter-spacing:.2em;margin-bottom:28px}
+.hero h1{font-size:clamp(2.8rem,7.4vw,6rem);font-weight:800;line-height:1.02;letter-spacing:-.035em;max-width:1000px;margin:0 auto 30px}
+.hero h1 .hl{color:var(--cyan-soft);display:inline-block;position:relative}
+.hero h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.07em;background:rgba(92,200,176,.35);border-radius:4px}
+.hero p.sub{font-size:1.25rem;color:rgba(255,255,255,.7);max-width:700px;margin:0 auto 42px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.hero .btn{padding:18px 34px;font-size:1.05rem;font-weight:700}
+.hero .btn-primary{box-shadow:0 14px 40px rgba(47,127,112,.4)}
+.badges{display:flex;flex-wrap:wrap;gap:12px 0;justify-content:center;margin-top:46px;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.78)}
+.badges span{display:flex;align-items:center;gap:10px;padding:0 24px;border-left:1px solid rgba(255,255,255,.14)}
+.badges span:first-child{border-left:0}
+.badges svg{width:18px;height:18px;stroke:var(--cyan-soft);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid rgba(92,200,176,.4);border-radius:999px;font-size:.82rem;color:var(--cyan-soft);background:rgba(92,200,176,.08);margin-bottom:20px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cyan-soft);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(92,200,176,0)}100%{box-shadow:0 0 0 0 rgba(92,200,176,0)}}
+
+/* phone mockup */
+.phone-wrap{position:relative;display:flex;justify-content:center}
+.phone-wrap::before{content:"";position:absolute;inset:8% 8%;background:var(--cyan);filter:blur(90px);opacity:.28;border-radius:50%}
+.phone{position:relative;width:310px;background:var(--black);border-radius:42px;padding:12px;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.phone{color:#fff}
+.screen{background:linear-gradient(180deg,#12302e,#0a1b1a);border-radius:32px;padding:20px 16px 22px;min-height:560px}
+.statusbar{display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:18px}
+.chat-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--teal-700));display:grid;place-items:center;font-weight:800;color:#fff;font-size:.9rem}
+.chat-head b{font-size:.92rem;display:block}.chat-head small{color:var(--cyan-soft);font-size:.7rem}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-bottom:12px;animation:rise .8s both}
+.card:nth-of-type(2){animation-delay:.25s}.card:nth-of-type(3){animation-delay:.5s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.05em;margin-bottom:8px}
+.tag.hot{background:rgba(255,92,92,.18);color:#ff8d8d}.tag.warm{background:rgba(255,196,77,.16);color:#ffd27a}.tag.ok{background:rgba(47,143,126,.2);color:var(--cyan-soft)}
+.card h4{font-size:.9rem;margin-bottom:4px}.card p{font-size:.78rem;color:rgba(255,255,255,.62);line-height:1.45}
+.actions{display:flex;gap:6px;margin-top:10px}
+.actions span{flex:1;text-align:center;font-size:.7rem;font-weight:600;padding:7px 0;border-radius:9px;background:rgba(255,255,255,.08)}
+.actions span:first-child{background:var(--cyan);color:#fff}
+
+/* stats */
+.stats{background:#17302f;border-top:1px solid rgba(255,255,255,.06);color:var(--white);padding:56px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat b{display:block;font-size:2.4rem;font-weight:800;color:var(--cyan-soft)}
+.stat span{color:rgba(255,255,255,.62);font-size:.92rem}
+
+/* about */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.checks{list-style:none;margin-top:26px;display:grid;gap:14px}
+.checks li{display:flex;gap:12px;color:var(--grey-700)}
+.checks li::before{content:"";flex:0 0 22px;height:22px;border-radius:50%;background:var(--cyan-glow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f8f7e' stroke-width='3'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/13px no-repeat;margin-top:2px}
+.panel{background:linear-gradient(145deg,var(--teal-900),var(--teal-950));border-radius:28px;padding:40px;color:var(--white);position:relative;overflow:hidden}
+.panel::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--cyan);opacity:.14;filter:blur(40px)}
+.panel h3{font-size:1.5rem;margin-bottom:12px}.panel p{color:rgba(255,255,255,.7)}
+.by{display:flex;align-items:center;gap:12px;margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:.9rem;color:var(--cyan-soft)}
+
+/* features grid */
+.features{background:var(--grey-50)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
+.feat{background:var(--white);border:1px solid var(--grey-100);border-radius:var(--radius);padding:30px;transition:.3s}
+.feat:hover{transform:translateY(-6px);border-color:var(--cyan);box-shadow:0 24px 50px rgba(13,46,58,.1)}
+.icon{width:50px;height:50px;border-radius:14px;background:var(--teal-800);display:grid;place-items:center;margin-bottom:20px}
+.icon svg{width:24px;height:24px;stroke:var(--cyan);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{font-size:1.15rem;margin-bottom:8px}.feat p{color:var(--grey-500);font-size:.96rem}
+
+/* loop */
+.loop{background:linear-gradient(180deg,var(--teal-950),var(--teal-900));color:var(--white)}
+.loop .eyebrow,.setup .eyebrow,.benefits .eyebrow,.panel .eyebrow{color:var(--cyan-soft)}
+.loop .lead{color:rgba(255,255,255,.65)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;position:relative}
+.step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:28px;position:relative}
+.step i{font-style:normal;font-size:.8rem;font-weight:800;color:var(--cyan-soft);letter-spacing:.1em}
+.step h3{margin:10px 0 8px;font-size:1.15rem}.step p{color:rgba(255,255,255,.62);font-size:.93rem}
+
+/* team */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:54px}
+.agent{border:1px solid var(--grey-100);border-radius:var(--radius);padding:28px;background:var(--white);position:relative;overflow:hidden}
+.agent::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--cyan),var(--teal-700))}
+.agent .role{font-size:.74rem;font-weight:700;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}
+.agent h3{margin:8px 0;font-size:1.3rem}.agent p{color:var(--grey-500);font-size:.94rem}
+
+/* use cases tabs */
+.usecases{background:var(--grey-50)}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:40px 0 34px}
+.tab{padding:10px 22px;border-radius:999px;border:1.5px solid var(--grey-100);background:var(--white);font-weight:600;font-size:.92rem;cursor:pointer;font-family:inherit;color:var(--grey-700);transition:.2s}
+.tab:hover{border-color:var(--cyan)}
+.tab.on{background:var(--teal-900);border-color:var(--teal-900);color:var(--white)}
+.case{display:none;grid-template-columns:1fr 1fr;gap:40px;background:var(--white);border-radius:28px;padding:44px;border:1px solid var(--grey-100);align-items:center}
+.case.on{display:grid;animation:rise .5s both}
+.case h3{font-size:1.7rem;margin-bottom:12px}.case p{color:var(--grey-500);margin-bottom:18px}
+.scenario{background:var(--teal-900);color:var(--white);border-radius:20px;padding:26px}
+.scenario small{color:var(--cyan-soft);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.scenario ol{margin:14px 0 0 18px;display:grid;gap:10px;color:rgba(255,255,255,.78);font-size:.94rem}
+.scenario ol li::marker{color:var(--cyan)}
+
+/* day timeline */
+.timeline{max-width:820px;margin:54px auto 0;display:grid;gap:0}
+.t-row{display:grid;grid-template-columns:90px 1fr;gap:22px;padding-bottom:30px;position:relative}
+.t-row::before{content:"";position:absolute;left:101px;top:14px;bottom:-4px;width:2px;background:var(--grey-100)}
+.t-row:last-child::before{display:none}
+.t-time{font-weight:800;color:var(--teal-900);font-size:1.15rem;padding-top:2px}
+.t-body{margin-left:30px;position:relative;background:var(--white);border:1px solid var(--grey-100);border-radius:16px;padding:18px 22px}
+.t-body::before{content:"";position:absolute;left:-39px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--cyan);border:3px solid var(--white);box-shadow:0 0 0 2px var(--cyan)}
+.t-body h4{font-size:1rem;margin-bottom:2px}.t-body p{color:var(--grey-500);font-size:.92rem}
+
+/* setup */
+.setup{background:var(--black);color:var(--white)}
+.setup .lead{color:rgba(255,255,255,.6)}
+.setup-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:54px;counter-reset:s}
+.sstep{counter-increment:s;border-top:2px solid var(--teal-700);padding-top:22px}
+.sstep::before{content:"0" counter(s);display:block;font-size:2.4rem;font-weight:800;color:var(--cyan-soft);margin-bottom:8px}
+.sstep h3{font-size:1.1rem;margin-bottom:6px}.sstep p{color:rgba(255,255,255,.58);font-size:.93rem}
+
+/* integrations */
+.int-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:44px}
+.chip{padding:14px 26px;border-radius:14px;border:1px solid var(--grey-100);background:var(--white);font-weight:600;color:var(--teal-900);transition:.2s}
+.chip:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 10px 24px var(--cyan-glow)}
+
+/* benefits */
+.benefits{background:linear-gradient(135deg,var(--teal-900),var(--teal-950));color:var(--white)}
+.benefits .lead{color:rgba(255,255,255,.65)}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}
+.ben{padding:30px;border-radius:var(--radius);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.ben b{display:block;font-size:1.15rem;margin-bottom:8px;color:var(--cyan-soft)}
+.ben p{color:rgba(255,255,255,.65);font-size:.95rem}
+
+/* faq */
+.faq{max-width:820px;margin:48px auto 0}
+.q{border-bottom:1px solid var(--grey-100)}
+.q button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;gap:20px;padding:22px 4px;font-weight:600;font-size:1.05rem;cursor:pointer}
+.q button:hover{color:var(--teal-700)}
+.q button::after{content:"+";font-size:1.5rem;color:var(--cyan);transition:.25s;line-height:1}
+.q.open button::after{transform:rotate(45deg)}
+.q .a{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--grey-500)}
+.q .a p{padding:0 4px 22px}
+
+/* cta */
+.cta{padding:0 0 96px}
+.cta-box{background:radial-gradient(600px 300px at 80% 0,rgba(47,143,126,.3),transparent 70%),var(--teal-900);color:var(--white);border-radius:32px;padding:72px 40px;text-align:center}
+.cta-box h2{max-width:700px;margin:0 auto 16px}
+.cta-box p{color:rgba(255,255,255,.7);max-width:560px;margin:0 auto 32px}
+.cta-box .hero-cta{justify-content:center}
+.contact-line{margin-top:28px;color:rgba(255,255,255,.55);font-size:.92rem}
+.contact-line a{color:var(--cyan-soft)}
+
+/* footer */
+footer{background:var(--black);color:rgba(255,255,255,.6);padding:50px 0 30px;font-size:.9rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot a:hover{color:var(--cyan)}
+.foot ul{list-style:none;display:flex;gap:24px;flex-wrap:wrap}
+.legal{padding-top:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:.82rem}
+
+.foot4{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot4 h5{color:#fff;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.foot4 ul{list-style:none;display:grid;gap:10px}
+.foot4 a:hover{color:var(--cyan-soft)}
+@media(max-width:820px){.foot4{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.foot4{grid-template-columns:1fr}}
+
+/* live demo */
+.demo{background:linear-gradient(180deg,#0b1a19,#12302e);color:var(--white)}
+.demo .eyebrow{color:var(--cyan-soft)}
+.demo .lead{color:rgba(255,255,255,.65)}
+.demo-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;margin-top:52px;align-items:stretch}
+.demo-pick,.demo-call{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:34px}
+.demo-pick h3{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan-soft);margin-bottom:16px}
+.sectors{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:32px}
+.sector{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.85);font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;transition:.2s}
+.sector svg{flex:0 0 22px;width:22px;height:22px;stroke:var(--cyan-soft);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sector:hover{border-color:var(--cyan-soft);background:rgba(92,200,176,.08)}
+.sector[aria-checked="true"]{border-color:var(--cyan-soft);background:rgba(92,200,176,.16);color:#fff;box-shadow:0 0 0 3px rgba(92,200,176,.12)}
+.sector:focus-visible{outline:2px solid var(--cyan-soft);outline-offset:2px}
+.say{list-style:none;display:grid;gap:10px}
+.say li{padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.16);color:rgba(255,255,255,.8);font-size:.95rem;font-style:italic}
+.demo-call{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(420px 260px at 50% 0,rgba(92,200,176,.2),transparent 70%),rgba(255,255,255,.05)}
+.orb{position:relative;width:132px;height:132px;border-radius:50%;margin-bottom:26px;background:radial-gradient(circle at 35% 30%,#8fe3cf,var(--cyan) 55%,var(--teal-800));display:grid;place-items:center;box-shadow:0 0 60px rgba(92,200,176,.35)}
+.orb::before,.orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(92,200,176,.5);animation:ring 2.8s infinite}
+.orb::after{animation-delay:1.4s}
+.orb svg{width:46px;height:46px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+.demo-call small{color:var(--cyan-soft);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.demo-call h3{font-size:1.5rem;margin:8px 0 12px}
+.demo-call .howto{color:rgba(255,255,255,.72);max-width:340px;margin-bottom:22px}
+.demo-call .howto b{color:#fff}
+.demo-call .fine{margin-top:22px;font-size:.78rem;color:rgba(255,255,255,.45);max-width:360px;line-height:1.5}
+.tap-tip{position:fixed;right:22px;bottom:98px;z-index:40;background:var(--cyan-soft);color:#062320;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;transform:translateY(8px);pointer-events:none;transition:.3s}
+.tap-tip::after{content:"";position:absolute;right:26px;bottom:-6px;width:12px;height:12px;background:var(--cyan-soft);transform:rotate(45deg);border-radius:2px}
+.tap-tip.show{opacity:1;transform:none}
+@media(max-width:980px){.demo-grid{grid-template-columns:1fr}}
+@media(max-width:520px){.sectors{grid-template-columns:1fr}.demo-pick,.demo-call{padding:26px}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:.8s}
+.rv.in{opacity:1;transform:none}
+
+/* responsive */
+@media(max-width:980px){
+  .hero-grid,.split,.case{grid-template-columns:1fr}
+  .grid3,.ben-grid{grid-template-columns:repeat(2,1fr)}
+  .steps,.team-grid,.setup-steps,.stats-grid{grid-template-columns:repeat(2,1fr)}
+  .nav .wrap{grid-template-columns:1fr auto;height:72px;padding:0 20px}
+  .pillnav{position:absolute;top:72px;left:16px;right:16px;flex-direction:column;border-radius:20px;background:#0a1614;display:none}
+  .pillnav.open{display:flex}
+  .burger{display:block}
+  .nav .btn.desk{display:none}
+  .hero{padding:90px 0 80px}
+  .badges span{border-left:0;padding:0 14px}
+  section{padding:72px 0}
+}
+@media(max-width:620px){
+  .grid3,.ben-grid,.steps,.team-grid,.setup-steps{grid-template-columns:1fr}
+  .stats-grid{gap:30px 10px}
+  .case{padding:28px}
+  .t-row{grid-template-columns:62px 1fr}.t-row::before{left:73px}.t-time{font-size:.95rem}
+  .cta-box{padding:52px 22px}
+  .phone{width:280px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ CALLORA PAGE HEADER ============
+     Same header as the Clariana site. Links point to the home-page sections;
+     change "/#services" etc. if your routes differ. "Callora" is the active page. -->
+<header class="nav">
+  <div class="wrap">
+    <a href="/" class="logo" aria-label="Clariana home"><span class="logo-tile"><svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M24.5 8.2A11 11 0 1 0 24.5 23.8" stroke="#12302e" stroke-width="4.2" stroke-linecap="round"/><rect x="13" y="16" width="2.8" height="6" rx="1" fill="#2f7f70"/><rect x="17.2" y="12.5" width="2.8" height="9.5" rx="1" fill="#2f7f70"/><rect x="21.4" y="9" width="2.8" height="13" rx="1" fill="#2f7f70"/></svg></span></a>
+    <ul class="pillnav" id="menu">
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#workflow">Workflow</a></li>
+      <li><a href="/#roi">ROI</a></li>
+      <li><a href="/#process">Process</a></li>
+      <li><a href="/#contact">Contact</a></li>
+      <li><a href="#top" class="active" aria-current="page">Callora</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="btn btn-primary desk" href="https://calendly.com/zohaibrafique/30min">Book Free Audit</a>
+      <button class="burger" id="burger" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Callora · AI call handling for UK businesses</span>
+    <h1>Never miss<br>another <span class="hl">opportunity.</span></h1>
+    <p class="sub">Callora answers, qualifies and follows up on every call, day and night, then delivers each ready-to-act enquiry straight to your phone. A professional AI service from Clariana.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#demo">Talk to Callora Live</a>
+      <a class="btn btn-ghost" href="https://calendly.com/zohaibrafique/30min">Book a Free 30-Min Audit</a>
+    </div>
+    <div class="badges">
+      <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Answers 24/7</span>
+      <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Keep your existing number</span>
+      <span><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>UK-based team</span>
+      <span><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Live in days, not months</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats"><div class="wrap stats-grid">
+  <div class="stat"><b>24/7</b><span>Always-on call answering</span></div>
+  <div class="stat"><b>&lt; 3s</b><span>Designed for instant pick-up</span></div>
+  <div class="stat"><b>0</b><span>Number changes required</span></div>
+  <div class="stat"><b>1 tap</b><span>From enquiry to booking</span></div>
+</div></div>
+
+<!-- LIVE DEMO -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">Live demo</span>
+      <h2>Talk to Callora. Right now.</h2>
+      <p class="lead">Choose a sector, press the call button and speak. Callora answers as the receptionist for a demo business in that sector, exactly as it would for your customers.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-pick rv">
+        <h3>1. Choose a sector</h3>
+        <div class="sectors" id="sectors" role="radiogroup" aria-label="Choose a business sector">
+          <button class="sector" role="radio" aria-checked="true" data-key="plumbing"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Plumbers &amp; electricians</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="roofing"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>Roofing &amp; construction</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="property"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M10 21v-4h4v4"/></svg><span>Estate agents &amp; lettings</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="dental"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg><span>Dental &amp; private clinics</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="hotel"><svg viewBox="0 0 24 24"><path d="M3 20V7M3 14h18v6M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="1.600"/></svg><span>Hotels &amp; hospitality</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="cleaning"><svg viewBox="0 0 24 24"><path d="M12 2l1.800 4.600L18.500 8l-4.700 1.400L12 14l-1.800-4.600L5.500 8l4.700-1.400z"/><path d="M19 15l.9 2.100L22 18l-2.100.9L19 21l-.9-2.100L16 18l2.100-.9z"/></svg><span>Cleaning companies</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="garage"><svg viewBox="0 0 24 24"><path d="M5 16l1.500-5.500A2 2 0 0 1 8.400 9h7.200a2 2 0 0 1 1.900 1.500L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.500"/><circle cx="7.500" cy="18" r=".6"/><circle cx="16.500" cy="18" r=".6"/></svg><span>Automotive garages</span></button>
+          <button class="sector" role="radio" aria-checked="false" data-key="other"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>Other service businesses</span></button>
+        </div>
+        <h3>2. Try saying</h3>
+        <ul class="say" id="sayList"></ul>
+      </div>
+      <div class="demo-call rv">
+        <div class="orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></div>
+        <small id="callSector">Plumbers &amp; electricians</small>
+        <h3 id="callBiz">Bright Spark Plumbing &amp; Electrical</h3>
+        <p class="howto"><b>3. Press the call button</b> in the bottom-right corner of your screen, allow microphone access and start talking.</p>
+        <p class="fine">Demo businesses are fictional. Your microphone is only used during a call. Calls may be recorded and processed by ElevenLabs to run this demo. Want it for your own business? <a href="https://calendly.com/zohaibrafique/30min" style="color:var(--cyan-soft);text-decoration:underline">Book a free audit</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div id="widgetMount"></div>
+</section>
+<div class="tap-tip" id="tapTip" aria-hidden="true">Tap to talk to Callora</div>
+
+<!-- POCKET -->
+<section id="pocket">
+  <div class="wrap split">
+    <div class="phone-wrap rv">
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span>Callora</span></div>
+        <div class="chat-head"><div class="avatar">C</div><div><b>Callora Dispatch</b><small>● New enquiry captured</small></div></div>
+        <div class="card"><span class="tag hot">URGENT</span><h4>Burst pipe — kitchen ceiling</h4><p>Sarah M. · BH1 · Water is coming through now. Needs same-day attention.</p><div class="actions"><span>Accept</span><span>Call back</span><span>Decline</span></div></div>
+        <div class="card"><span class="tag warm">NEW LEAD</span><h4>Boiler service enquiry</h4><p>James T. · BH7 · Prefers Thursday morning. Calendar slot offered.</p></div>
+        <div class="card"><span class="tag ok">BOOKED</span><h4>Consultation confirmed</h4><p>Added to your calendar. Confirmation sent to the customer.</p></div>
+      </div></div>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">Every enquiry, in your pocket</span>
+      <h2>Qualified leads delivered to WhatsApp in seconds</h2>
+      <p class="lead">Each call becomes a clear job card with the caller's name, need, location and urgency. Accept, call back or decline in one tap, and the customer is notified automatically.</p>
+      <ul class="checks">
+        <li>Priority flags put emergencies and high-value work first</li>
+        <li>Accepted jobs drop straight into your calendar</li>
+        <li>Spam and sales calls are filtered out before they reach you</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap split">
+    <div class="rv">
+      <span class="eyebrow">The service</span>
+      <h2>Every call is a customer. Callora treats it that way.</h2>
+      <p class="lead">When you're on a job, in a meeting or off shift, calls go unanswered and most callers never try again. Callora is a managed AI call-handling service that picks up every call in your brand's voice and turns it into an organised, actionable enquiry.</p>
+      <ul class="checks">
+        <li>Natural conversation, not phone menus or "press 1" trees</li>
+        <li>Works on your current business number through simple call forwarding</li>
+        <li>Configured, tested and supported by the Clariana team</li>
+      </ul>
+    </div>
+    <div class="panel rv">
+      <h3>AI automation, delivered as a service</h3>
+      <p>Callora is part of Clariana's AI Automation practice, a UK consultancy specialising in autonomous agents, conversational AI and data-driven automation. You get the technology and the expertise to make it fit your business.</p>
+      <div class="by"><span class="logo-tile" style="width:30px;height:30px;border-radius:8px"><svg width="20" height="20" viewBox="0 0 32 32" fill="none"><path d="M24.5 8.2A11 11 0 1 0 24.5 23.8" stroke="#12302e" stroke-width="4.2" stroke-linecap="round"/><rect x="13" y="16" width="2.8" height="6" rx="1" fill="#2f7f70"/><rect x="17.2" y="12.5" width="2.8" height="9.5" rx="1" fill="#2f7f70"/><rect x="21.4" y="9" width="2.8" height="13" rx="1" fill="#2f7f70"/></svg></span> Callora · A Clariana service</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">Capabilities</span><h2>Everything between "ring ring" and "booked"</h2><p class="lead">A complete call-to-booking workflow, tailored to the way your business actually runs.</p></div>
+    <div class="grid3">
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></div><h3>Natural voice conversations</h3><p>Choose a voice and accent that suits your brand. Callora greets callers by your business name and holds a real conversation.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Always on, around the clock</h3><p>Evenings, weekends, bank holidays and busy periods. Every call is answered, including several at once.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></div><h3>Smart qualification</h3><p>Captures name, number, location, need and timing, using questions tailored to your services and service area.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div><h3>Urgency triage</h3><p>Every enquiry is flagged by priority so emergencies and high-value opportunities reach you first.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Calendar-aware booking</h3><p>Checks your availability, respects working hours and offers real slots. Syncs with Google, Outlook and Apple calendars.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg></div><h3>Instant WhatsApp dispatch</h3><p>Each lead arrives as a clear job card. Accept, call back or decline in one tap, and the customer is notified.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><h3>Live transfer</h3><p>Callers can be put through to you when you're free, with a graceful fallback to message capture when you're not.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></div><h3>Transcripts &amp; call history</h3><p>Every call is summarised and searchable in your dashboard, with spam and sales calls filtered out.</p></div>
+      <div class="feat rv"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg></div><h3>Reputation &amp; insight tools</h3><p>Automated review requests after completed work, plus regular insight reports on your market and competitors.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="loop" id="how">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">How it works</span><h2>From ringing phone to confirmed booking, in seconds</h2><p class="lead">A simple automated loop that runs on every call without you lifting a finger.</p></div>
+    <div class="steps">
+      <div class="step rv"><i>01</i><h3>Customer calls</h3><p>Your existing number forwards to Callora. Customers dial the same number they always have.</p></div>
+      <div class="step rv"><i>02</i><h3>Callora answers</h3><p>Picked up within moments, in your brand's voice, following your rules, hours and service area.</p></div>
+      <div class="step rv"><i>03</i><h3>Instant dispatch</h3><p>A structured enquiry with name, need, location and urgency lands on WhatsApp, with spam filtered out.</p></div>
+      <div class="step rv"><i>04</i><h3>One-tap action</h3><p>Accept, call back or decline. Accepted jobs go to your calendar and the customer gets a confirmation.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">The Callora suite</span><h2>An AI revenue team behind every call</h2><p class="lead">Specialist AI capabilities working together so you can focus on the work itself.</p></div>
+    <div class="team-grid">
+      <div class="agent rv"><span class="role">Answer</span><h3>Voice Agent</h3><p>Answers every call, captures the details and handles routine questions around the clock.</p></div>
+      <div class="agent rv"><span class="role">Qualify</span><h3>Triage Engine</h3><p>Scores urgency and fit so the most important enquiries are surfaced first.</p></div>
+      <div class="agent rv"><span class="role">Reputation</span><h3>Review Assistant</h3><p>Requests reviews from happy customers after a job is complete to strengthen your online presence.</p></div>
+      <div class="agent rv"><span class="role">Insight</span><h3>Market Insights</h3><p>Regular competitor and visibility analysis to show where your next opportunities are.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="usecases" id="usecases">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">Business use cases</span><h2>Built for businesses that live on the phone</h2><p class="lead">If a missed call can mean a missed customer, Callora fits.</p></div>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-t="0">Trades &amp; field services</button>
+      <button class="tab" data-t="1">Clinics &amp; practices</button>
+      <button class="tab" data-t="2">Property &amp; lettings</button>
+      <button class="tab" data-t="3">Professional services</button>
+      <button class="tab" data-t="4">Hospitality &amp; salons</button>
+    </div>
+    <div class="case on"><div><h3>Trades &amp; field services</h3><p>Plumbers, electricians, heating engineers, roofers and builders are often up a ladder when the phone rings. Callora keeps the work coming in.</p><ul class="checks"><li>Emergency call-outs flagged and sent instantly</li><li>Quote requests captured with postcode and job details</li></ul></div>
+      <div class="scenario"><small>Example flow</small><ol><li>Caller reports a leak at 11:40pm</li><li>Callora asks safety and location questions</li><li>Priority enquiry sent to WhatsApp in seconds</li><li>You accept and call back, job secured</li></ol></div></div>
+    <div class="case"><div><h3>Clinics &amp; practices</h3><p>Dental, physio, veterinary and specialist practices can capture appointment requests and routine queries while reception is busy or closed.</p><ul class="checks"><li>New-patient and booking requests captured out of hours</li><li>Consistent, professional first impression on every call</li></ul></div>
+      <div class="scenario"><small>Example flow</small><ol><li>Caller rings after closing time</li><li>Callora collects details and preferred slot</li><li>Request logged for the team's morning review</li><li>Patient receives confirmation of next steps</li></ol></div></div>
+    <div class="case"><div><h3>Property &amp; lettings</h3><p>Agents, landlords and property managers can respond to viewing requests and maintenance reports without tying up staff.</p><ul class="checks"><li>Viewing enquiries qualified and booked into diaries</li><li>Tenant maintenance issues triaged by urgency</li></ul></div>
+      <div class="scenario"><small>Example flow</small><ol><li>Tenant reports a heating fault</li><li>Callora records property and urgency</li><li>Urgent issue routed to the on-call contact</li><li>Tenant receives acknowledgement</li></ol></div></div>
+    <div class="case"><div><h3>Professional services</h3><p>Solicitors, accountants, consultants and agencies can make sure every new enquiry is captured and routed to the right person.</p><ul class="checks"><li>New-client enquiries qualified before they reach you</li><li>Sales and spam calls filtered automatically</li></ul></div>
+      <div class="scenario"><small>Example flow</small><ol><li>Prospect calls during a client meeting</li><li>Callora captures the need and contact details</li><li>Summary sent to the right partner</li><li>Consultation booked from your calendar</li></ol></div></div>
+    <div class="case"><div><h3>Hospitality &amp; salons</h3><p>Restaurants, cafés, salons and studios can take bookings and answer common questions while the team focuses on guests in front of them.</p><ul class="checks"><li>Booking and availability requests handled instantly</li><li>Opening hours and FAQs answered consistently</li></ul></div>
+      <div class="scenario"><small>Example flow</small><ol><li>Caller asks for a Saturday appointment</li><li>Callora checks the calendar and offers slots</li><li>Booking confirmed and added to the diary</li><li>Team sees the summary on WhatsApp</li></ol></div></div>
+  </div>
+</section>
+
+<!-- DAY -->
+<section id="day">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">A day with Callora</span><h2>Covered from first call to last</h2><p class="lead">A typical day, with Callora on the phone while you get on with the work.</p></div>
+    <div class="timeline">
+      <div class="t-row rv"><div class="t-time">08:10</div><div class="t-body"><h4>Quote request while you're on site</h4><p>Details captured and sent to WhatsApp before you've put your tools down.</p></div></div>
+      <div class="t-row rv"><div class="t-time">10:45</div><div class="t-body"><h4>Diary slot booked</h4><p>Callora checks your calendar and confirms a time with the customer.</p></div></div>
+      <div class="t-row rv"><div class="t-time">13:20</div><div class="t-body"><h4>Sales call filtered</h4><p>Unwanted calls are politely handled and kept out of your day.</p></div></div>
+      <div class="t-row rv"><div class="t-time">16:05</div><div class="t-body"><h4>Live transfer for a priority caller</h4><p>When you're free, urgent callers are put straight through to you.</p></div></div>
+      <div class="t-row rv"><div class="t-time">19:30</div><div class="t-body"><h4>Voicemail turned into text</h4><p>Anything left after hours is transcribed and delivered, ready to act on.</p></div></div>
+      <div class="t-row rv"><div class="t-time">02:10</div><div class="t-body"><h4>Out-of-hours emergency</h4><p>Flagged as urgent and dispatched immediately, so you decide how to respond.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="benefits">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">Benefits</span><h2>More opportunities captured. Less time on the phone.</h2><p class="lead">Callora turns the calls you used to lose into organised, actionable work.</p></div>
+    <div class="ben-grid">
+      <div class="ben rv"><b>Win more work</b><p>Callers reach a responsive, professional voice instead of voicemail, so fewer enquiries drift to competitors.</p></div>
+      <div class="ben rv"><b>Protect your time</b><p>Stay focused on the job in front of you. Spam and low-value calls never interrupt you.</p></div>
+      <div class="ben rv"><b>Look bigger</b><p>A polished, consistent call experience gives a small team the presence of a much larger one.</p></div>
+      <div class="ben rv"><b>Respond faster</b><p>Priority flags and instant WhatsApp delivery mean you act on the right enquiry first.</p></div>
+      <div class="ben rv"><b>Stay in control</b><p>Review transcripts, adjust responses and set your own rules from a simple dashboard.</p></div>
+      <div class="ben rv"><b>Expert-led</b><p>Clariana configures, tests and refines Callora around your business, so it works from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP -->
+<section class="setup" id="setup">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">Getting started</span><h2>Live in four simple steps</h2><p class="lead">No new hardware, no new number, no technical know-how required.</p></div>
+    <div class="setup-steps">
+      <div class="sstep rv"><h3>Discovery</h3><p>We learn your services, coverage area, hours and how you like enquiries handled.</p></div>
+      <div class="sstep rv"><h3>Configure &amp; test</h3><p>Choose your voice and greeting. We tune the call flow and test it end to end.</p></div>
+      <div class="sstep rv"><h3>Connect</h3><p>Link your calendar and WhatsApp so bookings and job cards flow automatically.</p></div>
+      <div class="sstep rv"><h3>Go live</h3><p>Forward your calls to Callora and start capturing every opportunity.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations">
+  <div class="wrap center">
+    <div class="rv"><span class="eyebrow">Integrations</span><h2>Plugs into the tools you already use</h2><p class="lead">Callora connects to your calendar, messaging and workflow tools, and Clariana can build custom connections for your systems.</p></div>
+    <div class="int-grid rv">
+      <span class="chip">WhatsApp</span><span class="chip">Google Calendar</span><span class="chip">Outlook</span><span class="chip">Apple Calendar</span><span class="chip">Zapier</span><span class="chip">Make</span><span class="chip">Twilio</span><span class="chip">Google Reviews</span><span class="chip">Custom CRM</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="features" id="faq">
+  <div class="wrap">
+    <div class="center rv"><span class="eyebrow">FAQ</span><h2>Questions, answered</h2></div>
+    <div class="faq">
+      <div class="q"><button>Do I need to change my phone number?</button><div class="a"><p>No. You keep your existing business number and forward calls to Callora through your phone provider. Customers dial exactly what they always have.</p></div></div>
+      <div class="q"><button>Is it just a phone menu?</button><div class="a"><p>No. Callora holds a natural conversation. There are no "press 1 for…" menus, and callers can be transferred to you live when you're available.</p></div></div>
+      <div class="q"><button>What happens with urgent or emergency calls?</button><div class="a"><p>Callora asks the right safety and location questions, flags the enquiry as urgent and sends it to you immediately so you decide how to respond.</p></div></div>
+      <div class="q"><button>Can it book appointments?</button><div class="a"><p>Yes. Callora reads your connected calendar, offers genuinely available slots, respects your working hours and adds confirmed bookings automatically.</p></div></div>
+      <div class="q"><button>Can I choose the voice and greeting?</button><div class="a"><p>Yes. You can select a voice and accent that suits your brand and customise the greeting and call rules to match how you work.</p></div></div>
+      <div class="q"><button>How do I receive enquiries?</button><div class="a"><p>Primarily as structured WhatsApp job cards you can accept, call back or decline. Summaries can also be viewed in your dashboard.</p></div></div>
+      <div class="q"><button>Does Callora work with other systems?</button><div class="a"><p>Yes. It connects to common calendars and automation tools, and Clariana can build custom integrations with your CRM or workflow software.</p></div></div>
+      <div class="q"><button>Who sets it up?</button><div class="a"><p>Clariana's team handles configuration, testing and ongoing refinement, so the service is tailored to your business from the start.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact" style="padding-top:96px">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <h2>Never miss another opportunity.</h2>
+      <p>Talk to the Clariana team about putting Callora on your phones. We'll walk you through the service and tailor it to your business.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://calendly.com/zohaibrafique/30min">Book a Free 30-Min Audit</a>
+        <a class="btn btn-ghost" href="mailto:support@clariana.co.uk?subject=Callora%20enquiry">Email the team</a>
+      </div>
+      <p class="contact-line">Or call <a href="tel:+447444410737">+44 7444 410737</a> · <a href="mailto:support@clariana.co.uk">support@clariana.co.uk</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot4">
+      <div><a href="/" class="logo" style="margin-bottom:14px"><span class="logo-tile"><svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M24.5 8.2A11 11 0 1 0 24.5 23.8" stroke="#12302e" stroke-width="4.2" stroke-linecap="round"/><rect x="13" y="16" width="2.8" height="6" rx="1" fill="#2f7f70"/><rect x="17.2" y="12.5" width="2.8" height="9.5" rx="1" fill="#2f7f70"/><rect x="21.4" y="9" width="2.8" height="13" rx="1" fill="#2f7f70"/></svg></span><span>Clariana</span></a><p style="max-width:280px">AI automation and data systems for growing UK businesses.</p><p style="margin-top:10px">Bournemouth, UK</p></div>
+      <div><h5>Navigate</h5><ul><li><a href="/#services">Services</a></li><li><a href="/#workflow">Workflow</a></li><li><a href="/#process">Process</a></li><li><a href="/#roi">ROI Calculator</a></li><li><a href="/#contact">Contact</a></li><li><a href="#top">Callora</a></li></ul></div>
+      <div><h5>Services</h5><ul><li><a href="/#services">AI Automation</a></li><li><a href="/#services">Data Dashboards</a></li><li><a href="/#services">System Integrations</a></li><li><a href="/#services">Voice &amp; Chat AI</a></li><li><a href="/#services">Predictive Analytics</a></li></ul></div>
+      <div><h5>Connect</h5><ul><li><a href="https://www.linkedin.com/company/clariana/">LinkedIn</a></li><li><a href="https://www.facebook.com/profile.php?id=61586955624158">Facebook</a></li><li><a href="https://clariana.co.uk">clariana.co.uk</a></li><li><a href="tel:+447444410737">+44 7444 410737</a></li><li><a href="mailto:support@clariana.co.uk">support@clariana.co.uk</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© <span id="yr">2026</span> Clariana Ltd. All rights reserved.</span><span>Company No. 16975307, registered in England &amp; Wales</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  var b=document.getElementById('burger'),m=document.getElementById('menu');
+  b.addEventListener('click',function(){m.classList.toggle('open')});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A')m.classList.remove('open')});
+  var tabs=document.querySelectorAll('.tab'),cases=document.querySelectorAll('.case');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.classList.remove('on')});cases.forEach(function(x){x.classList.remove('on')});
+    t.classList.add('on');cases[+t.dataset.t].classList.add('on');
+  })});
+  document.querySelectorAll('.q button').forEach(function(btn){btn.addEventListener('click',function(){
+    var q=btn.parentElement,a=q.querySelector('.a'),open=q.classList.toggle('open');
+    a.style.maxHeight=open?a.scrollHeight+'px':0;
+  })});
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    els.forEach(function(el){io.observe(el)});
+  }else{els.forEach(function(el){el.classList.add('in')})}
+})();
+</script>
+
+<script>
+(function(){
+  var AGENT_ID='agent_8601m89j6yb7eth8m0bhz9gj4js1';
+  var SECTORS={
+    plumbing:{label:'Plumbers & electricians',biz:'Bright Spark Plumbing & Electrical',sector:'plumbing and electrical services',say:["“My boiler has stopped and I've got no hot water.”","“There's a burst pipe in my kitchen ceiling, it's urgent.”","“How much is an electrical safety report?”"]},
+    roofing:{label:'Roofing & construction',biz:'Summit Roofing & Construction',sector:'roofing and construction',say:["“I've got a leak in my roof after the storm.”","“I'd like a quote for a loft conversion.”","“Do you offer free site visits?”"]},
+    property:{label:'Estate agents & lettings',biz:'Harbour & Co Estate Agents',sector:'estate agency and property management',say:["“I'd like a free valuation of my flat.”","“I'm a tenant and my heating isn't working.”","“Can I book a viewing this Saturday?”"]},
+    dental:{label:'Dental & private clinics',biz:'Oakwood Dental & Private Clinic',sector:'dental and private clinic',say:["“I'd like to register as a new patient.”","“I've got a really bad toothache.”","“How much does teeth whitening cost?”"]},
+    hotel:{label:'Hotels & hospitality',biz:'The Elmstead Hotel',sector:'hotel and hospitality',say:["“I'd like a double room for two nights next month.”","“Can I book a table for six on Saturday?”","“Are dogs allowed in the rooms?”"]},
+    cleaning:{label:'Cleaning companies',biz:'Sparkle Home Cleaning',sector:'cleaning company',say:["“I need an end of tenancy clean for a two-bed flat.”","“How much is a regular weekly clean?”","“Do you bring your own cleaning products?”"]},
+    garage:{label:'Automotive garages',biz:'Precision Auto Garage',sector:'automotive garage',say:["“My MOT is due, can I book it in?”","“There's a grinding noise when I brake.”","“Do you offer courtesy cars?”"]},
+    other:{label:'Other service businesses',biz:'Clariana Demo Services',sector:'general UK service business',say:["“I'd like to book a service for next week.”","“Can someone call me back this afternoon?”","“What areas do you cover?”"]}
+  };
+  var mount=document.getElementById('widgetMount');
+  var sectorBtns=document.querySelectorAll('.sector');
+  var sayList=document.getElementById('sayList');
+  var callSector=document.getElementById('callSector');
+  var callBiz=document.getElementById('callBiz');
+
+  function mountWidget(key){
+    var s=SECTORS[key];
+    mount.innerHTML='';
+    var el=document.createElement('elevenlabs-convai');
+    el.setAttribute('agent-id',AGENT_ID);
+    el.setAttribute('dynamic-variables',JSON.stringify({business_name:s.biz,sector:s.sector}));
+    mount.appendChild(el);
+  }
+  function select(key){
+    var s=SECTORS[key];
+    sectorBtns.forEach(function(b){b.setAttribute('aria-checked',b.dataset.key===key?'true':'false')});
+    callSector.textContent=s.label;
+    callBiz.textContent=s.biz;
+    sayList.innerHTML='';
+    s.say.forEach(function(t){var li=document.createElement('li');li.textContent=t;sayList.appendChild(li)});
+    mountWidget(key);
+  }
+  sectorBtns.forEach(function(b){b.addEventListener('click',function(){select(b.dataset.key)})});
+  select('plumbing');
+
+  var tip=document.getElementById('tapTip'),demo=document.getElementById('demo');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){en.forEach(function(e){tip.classList.toggle('show',e.isIntersecting)})},{threshold:.25}).observe(demo);
+  }
+})();
+</script>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+</body>
+</html>
